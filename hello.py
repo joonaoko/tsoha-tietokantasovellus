@@ -16,7 +16,7 @@ esineet.append(Item("Kolmas"))
 esineet.append(Item("Neljäs"))
 
 @app.route("/")
-def testi():
+def hello():
     return render_template("index.html")
 
 @app.route("/demo")
