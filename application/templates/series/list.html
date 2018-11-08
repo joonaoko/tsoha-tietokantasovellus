@@ -12,9 +12,9 @@
       <td>{{ series.name }}</td>
       <td>{{ series.episodes_total }}</td>
       <td>
-	<form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
-	  <input type="submit" value="Increase by one"/>
-	</form>
+	    <form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
+	        <input type="submit" value="Increase by one"/>
+	    </form>
       </td>
     </tr>
     {% endfor %}
