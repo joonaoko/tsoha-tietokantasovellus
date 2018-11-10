@@ -1,0 +1,3 @@
+# Tietokantakaavio
+
+![Tietokantakaavio](databasediagram.png)
