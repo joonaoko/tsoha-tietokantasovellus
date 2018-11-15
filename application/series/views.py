@@ -1,4 +1,5 @@
 from flask import redirect, render_template, request, url_for
+from flask_login import login_required
 
 from application import app, db
 from application.series.models import Series
@@ -9,10 +10,12 @@ def series_index():
     return render_template("series/list.html", series = Series.query.all())
 
 @app.route("/series/new/")
+@login_required
 def series_form():
     return render_template("series/new.html", form = SeriesForm())
 
 @app.route("/series/<series_id>/", methods=["POST"])
+@login_required
 def series_set_episodes_total(series_id):
     s = Series.query.get(series_id)
     s.episodes_total += 1
@@ -21,6 +24,7 @@ def series_set_episodes_total(series_id):
     return redirect(url_for("series_index"))
 
 @app.route("/series/", methods=["POST"])
+@login_required
 def series_create():
     form = SeriesForm(request.form)
 
