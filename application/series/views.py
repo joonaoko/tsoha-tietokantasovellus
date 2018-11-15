@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application import app, db
 from application.series.models import Series
@@ -33,6 +33,7 @@ def series_create():
 
     s = Series(form.name.data)
     s.episodes_total = form.episodes_total.data
+    s.account_id = current_user.id
 
     db.session().add(s)
     db.session().commit()

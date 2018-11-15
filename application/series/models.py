@@ -9,6 +9,8 @@ class Series(db.Model):
     name = db.Column(db.String(144), nullable=False)
     episodes_total = db.Column(db.Integer, nullable=False)
 
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+
     def __init__(self, name):
         self.name = name
         self.episodes_total = 0;
