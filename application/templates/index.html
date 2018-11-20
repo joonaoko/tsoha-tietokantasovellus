@@ -4,4 +4,18 @@
   <p>
     Hello world!
   </p>
+
+  {% if no_episodes is defined %}
+  <p>
+    Series with no listed episodes:
+  </p>
+
+  <ul>
+    {% for series in no_episodes %}
+    <li>
+      {{series.name}}
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
 {% endblock %}
