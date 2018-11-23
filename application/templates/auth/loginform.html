@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<p>
+  <span>Not signed up yet? </span>
+  <a href="{{ url_for('auth_register') }}">Register here</a>
+</p>
 {{ error }}
 <form method="POST" action="{{ url_for('auth_login') }}">
   <table>
@@ -22,8 +26,9 @@
     </tr>
     <tr>
       <td colspan="2">
-	<input type="submit" value="Login"/>
+        <input type="submit" value="Login"/>
       </td>
     </tr>
 </form>
+
 {% endblock %}
