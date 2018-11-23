@@ -8,6 +8,7 @@
         <th>Episodes Total</th>
         <th></th>
         <th></th>
+        <th></th>
       </tr>
     </thead>
     
@@ -23,6 +24,11 @@
       <td>
         <form method="POST" action="{{ url_for('series_add_to_userseries', series_id=series.id) }}">
           <input type="submit" value="Add to watchlist"/>
+        </form>
+      </td>
+      <td>
+        <form method="POST" action="{{ url_for('series_delete', series_id=series.id) }}">
+          <input type="submit" value="Delete"/>
         </form>
       </td>
     </tr>

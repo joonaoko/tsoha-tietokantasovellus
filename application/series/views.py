@@ -6,6 +6,8 @@ from application.series.models import Series
 from application.series.forms import SeriesForm
 from application.userseries.models import UserSeries
 
+from sqlalchemy import text
+
 @app.route("/series", methods=["GET"])
 def series_index():
     return render_template("series/list.html", series = Series.query.all())
@@ -32,6 +34,17 @@ def series_add_to_userseries(series_id):
     us.account_id = current_user.id
 
     db.session().add(us)
+    db.session().commit()
+
+    return redirect(url_for("series_index"))
+
+@app.route("/series/delete/<series_id>/", methods=["POST"])
+@login_required
+def series_delete(series_id):
+    stmt = text("DELETE FROM series WHERE id = :id").params(id=series_id)
+    db.engine.execute(stmt)
+    stmt = text("DELETE FROM user_series WHERE series_id = :id").params(id=series_id)
+    db.engine.execute(stmt)
     db.session().commit()
 
     return redirect(url_for("series_index"))
