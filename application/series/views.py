@@ -41,9 +41,9 @@ def series_add_to_userseries(series_id):
 @app.route("/series/delete/<series_id>/", methods=["POST"])
 @login_required
 def series_delete(series_id):
-    stmt = text("DELETE FROM series WHERE id = :id").params(id=series_id)
-    db.engine.execute(stmt)
     stmt = text("DELETE FROM user_series WHERE series_id = :id").params(id=series_id)
+    db.engine.execute(stmt)
+    stmt = text("DELETE FROM series WHERE id = :id").params(id=series_id)
     db.engine.execute(stmt)
     db.session().commit()
 
