@@ -6,15 +6,21 @@
       <th>Series</th>
       <th>Episodes Total</th>
       <th></th>
+      <th></th>
     </tr>
     {% for series in series %}
     <tr>
       <td>{{ series.name }}</td>
       <td>{{ series.episodes_total }}</td>
       <td>
-	    <form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
-	        <input type="submit" value="Increase by one"/>
-	    </form>
+        <form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
+            <input type="submit" value="Increase by one"/>
+        </form>
+      </td>
+      <td>
+        <form method="POST" action="{{ url_for('series_add_to_userseries', series_id=series.id) }}">
+          <input type="submit" value="Add to watchlist"/>
+        </form>
       </td>
     </tr>
     {% endfor %}

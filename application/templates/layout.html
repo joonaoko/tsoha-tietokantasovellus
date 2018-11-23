@@ -16,12 +16,13 @@
 
     <ul>
       <li><a href="{{ url_for('series_index') }}">List series</a></li>
+      <li><a href="{{ url_for('userseries_index') }}">Watchlist</a></li>
       <li><a href="{{ url_for('series_form') }}">Add a series</a></li>
     </ul>
     {% block body %}
-      <p>
-        Content.
-      </p>
+    <p>
+      Content.
+    </p>
     {% endblock %}
   </body>
 </html>
