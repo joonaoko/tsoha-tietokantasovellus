@@ -21,7 +21,8 @@ class UserSeries(Base):
     def find_user_series(user_id=0):
         stmt = text("SELECT series.name, user_series.episodes_watched, user_series.status, user_series.id " 
                         "FROM user_series LEFT JOIN series ON user_series.series_id = series.id "
-                        "WHERE user_series.account_id = :user_id").params(user_id = current_user.id)
+                        "WHERE user_series.account_id = :user_id "
+                        "ORDER BY user_series.date_modified DESC, user_series.date_created DESC").params(user_id = current_user.id)
 
         res = db.engine.execute(stmt)
 
