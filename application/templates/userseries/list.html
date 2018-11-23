@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<table>
-    <tr>
-      <th>Series name</th>
-      <th>Episodes watched</th>
-      <th></th>
-      <th>Status</th>
-      <th></th>
-    </tr>
+<table class="table">
+  <thead class="thead-dark">
+      <tr>
+        <th>Series name</th>
+        <th>Episodes watched</th>
+        <th></th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+  </thead>
     {% for userseries in userseries %}
     <tr>
       <td>{{ userseries.series_name }}</td>
