@@ -1,15 +1,21 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <p>
-    Hello world!
-  </p>
+  <p>Welcome!</p>
+  <br>
+  
+  <p>Top 5 most popular series: </p>
+  <ol>
+    {% for series in most_popular %}
+    <li>
+      {{series.name}}&nbsp;({{series.amount}})
+    </li>
+    {% endfor %}
+  </ol>
+  <br>
 
   {% if no_episodes is defined %}
-  <p>
-    Series with no listed episodes:
-  </p>
-
+  <p>Series with no listed episodes:</p>
   <ul>
     {% for series in no_episodes %}
     <li>
