@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 class RegistrationForm(FlaskForm):
     name = StringField('Name', [validators.Length(min=2, max=200)])
     username = StringField('Username', [validators.Length(min=2, max=20)])
-    password = PasswordField('New Password', [validators.Length(min=5)])
+    password = PasswordField('Password', [validators.Length(min=5)])
 
     class Meta:
         csrf = False
