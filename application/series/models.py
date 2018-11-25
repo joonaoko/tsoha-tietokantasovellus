@@ -29,7 +29,7 @@ class Series(Base):
     @staticmethod
     def find_most_popular_series():
         stmt = text("SELECT series.name AS name, COUNT(user_series.series_id) AS amount "
-                    "FROM series INNER JOIN user_series ON user_series.series_id = series.id "
+                    "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
                     "GROUP BY user_series.series_id "
                     "ORDER BY amount DESC LIMIT 5")
         res = db.engine.execute(stmt)
