@@ -18,17 +18,17 @@
       <td>{{ series.episodes_total }}</td>
       <td>
         <form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
-            <input type="submit" value="Increase by one"/>
+            <input class="btn btn-dark" type="submit" value="Increase by one"/>
         </form>
       </td>
       <td>
         <form method="POST" action="{{ url_for('series_add_to_userseries', series_id=series.id) }}">
-          <input type="submit" value="Add to watchlist"/>
+          <input class="btn btn-dark" type="submit" value="Add to watchlist"/>
         </form>
       </td>
       <td>
         <form method="POST" action="{{ url_for('series_delete', series_id=series.id) }}">
-          <input type="submit" value="Delete"/>
+          <input class="btn btn-danger" type="submit" value="Delete"/>
         </form>
       </td>
     </tr>

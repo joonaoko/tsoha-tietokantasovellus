@@ -17,13 +17,13 @@
       <td>{{ userseries.episodes_watched }}</td>
       <td>
         <form method="POST" action="{{ url_for('userseries_increase_episodes_watched_by_one', userseries_id=userseries.id) }}">
-          <input type="submit" value="+1"/>
+          <input class="btn btn-dark" type="submit" value="+1"/>
         </form>
       </td>
       <td>{{ userseries.status }}</td>
       <td>
         <form method="POST" action="{{ url_for('userseries_delete', userseries_id=userseries.id) }}">
-          <input type="submit" value="Delete"/>
+          <input class="btn btn-danger" type="submit" value="Delete"/>
         </form>
       </td>
     </tr>

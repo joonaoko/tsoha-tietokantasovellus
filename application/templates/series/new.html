@@ -4,11 +4,11 @@
 <form method="POST" action="{{ url_for('series_create') }}">
   <table>
     <tr>
-      <td>
+      <td style="padding: 0.5em;">
         {{ form.name.label }}
       </td>
       <td>
-        {{ form.name }}
+        {{ form.name(class_='form-control') }}
       </td>
       <td>
         <ul>
@@ -19,16 +19,16 @@
       </td>
     </tr>
     <tr>
-        <td>
+        <td style="padding: 0.5em;">
           {{ form.episodes_total.label }}
         </td>
         <td>
-          {{ form.episodes_total }}
+          {{ form.episodes_total(class_='form-control') }}
         </td>
       </tr>
     <tr>
       <td colspan="2">
-        <input type="submit" value="Add a new series"/>
+        <input class="btn btn-dark" type="submit" value="Add a new series"/>
       </td>
     </tr>
   </table>
