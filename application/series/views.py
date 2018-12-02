@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required, current_user
+from flask_login import current_user, login_required
 
-from application import app, db
+from application import app, db, login_required
 from application.series.models import Series
 from application.series.forms import SeriesForm
 from application.userseries.models import UserSeries
@@ -13,12 +13,12 @@ def series_index():
     return render_template("series/list.html", series = Series.query.all())
 
 @app.route("/series/new/")
-@login_required
+@login_required(role="ANY")
 def series_form():
     return render_template("series/new.html", form = SeriesForm())
 
 @app.route("/series/<series_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def series_set_episodes_total(series_id):
     s = Series.query.get(series_id)
     s.episodes_total += 1
@@ -27,7 +27,7 @@ def series_set_episodes_total(series_id):
     return redirect(url_for("series_index"))
 
 @app.route("/series/addtolist/<series_id>/", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def series_add_to_userseries(series_id):
     us = UserSeries()
     us.series_id = series_id
@@ -39,7 +39,7 @@ def series_add_to_userseries(series_id):
     return redirect(url_for("series_index"))
 
 @app.route("/series/delete/<series_id>/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def series_delete(series_id):
     stmt = text("DELETE FROM user_series WHERE series_id = :id").params(id=series_id)
     db.engine.execute(stmt)
@@ -50,7 +50,7 @@ def series_delete(series_id):
     return redirect(url_for("series_index"))
 
 @app.route("/series/", methods=["POST"])
-@login_required
+@login_required(role="ADMIN")
 def series_create():
     form = SeriesForm(request.form)
 
@@ -63,5 +63,5 @@ def series_create():
 
     db.session().add(s)
     db.session().commit()
-  
+
     return redirect(url_for("series_index"))
