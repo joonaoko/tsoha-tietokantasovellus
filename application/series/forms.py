@@ -9,3 +9,11 @@ class SeriesForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class SeriesEpisodesTotalForm(FlaskForm):
+    episodes_total = IntegerField("Episodes total",
+                                   [validators.NumberRange(min=0, max=99999)],
+                                   widget=widgets.Input(input_type="number"))
+    
+    class Meta:
+        csrf = False
