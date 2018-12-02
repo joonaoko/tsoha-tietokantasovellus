@@ -20,9 +20,11 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('userseries_index') }} ">Watchlist</a>
             </li>
+            {% if current_user.role == 'ADMIN' %}
             <li class="nav-item">
               <a class="nav-link" href="{{ url_for('series_form') }} ">Add a series</a>
             </li>
+            {% endif %}
           </ul>
           <div class="form-inline mt-2 mt-md-0">
               {% if current_user.is_authenticated %}
