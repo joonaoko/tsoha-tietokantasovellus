@@ -25,6 +25,13 @@
         <td>
           {{ form.episodes_total(class_='form-control') }}
         </td>
+        <td>
+          <ul>
+            {% for error in form.episodes_total.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </td>
       </tr>
     <tr>
       <td colspan="2">
