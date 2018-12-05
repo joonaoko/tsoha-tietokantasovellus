@@ -9,6 +9,7 @@
         <th></th>
         <th>Status</th>
         <th></th>
+        <th></th>
       </tr>
   </thead>
     {% for userseries in userseries %}
@@ -21,6 +22,9 @@
         </form>
       </td>
       <td>{{ userseries.status }}</td>
+      <td>
+        <a href="{{ url_for('userseries_update_form', userseries_id=userseries.id) }} "><button class="btn btn-dark">Edit</button></a>
+      </td>
       <td>
         <form method="POST" action="{{ url_for('userseries_delete', userseries_id=userseries.id) }}">
           <input class="btn btn-danger" type="submit" value="Delete"/>
