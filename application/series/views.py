@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 
 from application import app, db, login_required
 from application.series.models import Series
-from application.series.forms import SeriesForm, SeriesEpisodesTotalForm
+from application.series.forms import SeriesForm, SeriesUpdateForm, SeriesEpisodesTotalForm
 from application.userseries.models import UserSeries
 
 from sqlalchemy import text
@@ -17,6 +17,12 @@ def series_index():
 @login_required(role="ANY")
 def series_form():
     return render_template("series/new.html", form = SeriesForm())
+
+@app.route("/series/update/<series_id>/")
+@login_required(role="ADMIN")
+def series_update_form(series_id):
+    s = Series.query.get(series_id)
+    return render_template("series/update.html", series = s, form = SeriesUpdateForm())
 
 @app.route("/series/<series_id>/", methods=["POST"])
 @login_required(role="ADMIN")
@@ -68,6 +74,21 @@ def series_create():
     s.account_id = current_user.id
 
     db.session().add(s)
+    db.session().commit()
+
+    return redirect(url_for("series_index"))
+
+@app.route("/series/update/<series_id>/", methods=["POST"])
+@login_required(role="ADMIN")
+def series_update(series_id):
+    form = SeriesUpdateForm(request.form)
+
+    if not form.validate():
+        return render_template("series/update.html", form = form)
+
+    s = Series.query.get(series_id)
+    s.name = form.name.data
+    s.episodes_total = form.episodes_total.data
     db.session().commit()
 
     return redirect(url_for("series_index"))

@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<div>Editing series {{ series.name }}</div><br>
+<form method="POST" action="{{ url_for('series_update', series_id = series.id) }}">
+  <table>
+    <tr>
+      <td style="padding: 0.5em;">
+        {{ form.name.label }}
+      </td>
+      <td>
+        {{ form.name(class_='form-control') }}
+      </td>
+      <td>
+        <ul>
+          {% for error in form.name.errors %}
+          <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      </td>
+    </tr>
+    <tr>
+        <td style="padding: 0.5em;">
+          {{ form.episodes_total.label }}
+        </td>
+        <td>
+          {{ form.episodes_total(class_='form-control') }}
+        </td>
+        <td>
+          <ul>
+            {% for error in form.episodes_total.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </td>
+      </tr>
+    <tr>
+      <td colspan="2">
+        <input class="btn btn-dark" type="submit" value="Update series"/>
+      </td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

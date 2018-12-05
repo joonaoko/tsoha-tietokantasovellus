@@ -5,9 +5,8 @@
     <thead class="thead-dark">
       <tr>
         <th>Series</th>
-        <th colspan="3">Episodes Total</th>
-        <th></th>
-        <th></th>
+        <th>Episodes Total</th>
+        <th colspan="3"></th>
       </tr>
     </thead>
     
@@ -15,26 +14,18 @@
     <tr>
       <td>{{ series.name }}</td>
       <td>{{ series.episodes_total }}</td>
-      
-      <form method="POST" action="{{ url_for('series_set_episodes_total', series_id=series.id) }}">
-        <td>
-          {% if current_user.role == 'ADMIN' %}
-            {{ form.episodes_total(class_='form-control') }}
-          {% endif %}
-        </td>
-        <td>
-          {% if current_user.role == 'ADMIN' %}
-          <input class="btn btn-dark" type="submit" value="Update"/>
-          {% endif %}
-        </td>
-      </form>
+      {% if current_user.role == 'ADMIN' %}
       <td>
-        {% if current_user.role == 'ADMIN' %}
+        <a href="{{ url_for('series_update_form', series_id=series.id) }} "><button class="btn btn-dark">Edit</button></a>
+      </td>
+      <td>
         <form method="POST" action="{{ url_for('series_delete', series_id=series.id) }}">
           <input class="btn btn-danger" type="submit" value="Delete"/>
         </form>
-        {% endif %}
       </td>
+      {% else %}
+      <td colspan="2"></td>
+      {% endif %}
       <td>
         <form method="POST" action="{{ url_for('series_add_to_userseries', series_id=series.id) }}">
           <input class="btn btn-dark" type="submit" value="Add to watchlist"/>
