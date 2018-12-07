@@ -15,7 +15,7 @@
     {% for userseries in userseries %}
     <tr>
       <td>{{ userseries.series_name }}</td>
-      <td>{{ userseries.episodes_watched }}</td>
+      <td>{{ userseries.episodes_watched }} / {{ userseries.series_eps }}</td>
       <td>
         <form method="POST" action="{{ url_for('userseries_increase_episodes_watched_by_one', userseries_id=userseries.id) }}">
           <input class="btn btn-dark" type="submit" value="+1"/>

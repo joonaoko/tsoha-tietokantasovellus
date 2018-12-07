@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<div>Editing series {{ series.name }}</div><br>
+<div>Editing {{ series.name }}</div><br>
 <form method="POST" action="{{ url_for('userseries_update', userseries_id = userseries.id) }}">
   <table>
     <tr>
@@ -36,7 +36,7 @@
       </tr>
     <tr>
       <td colspan="2">
-        <input class="btn btn-dark" type="submit" value="Update series"/>
+        <input class="btn btn-dark" type="submit" value="Update"/>
       </td>
     </tr>
   </table>
