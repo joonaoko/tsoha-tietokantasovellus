@@ -19,7 +19,7 @@ class UserSeries(Base):
     @staticmethod
     @login_required
     def find_user_series(user_id=0):
-        stmt = text("SELECT series.name, user_series.episodes_watched, user_series.status, user_series.id " 
+        stmt = text("SELECT series.name, user_series.episodes_watched, user_series.status, user_series.id, series.episodes_total " 
                         "FROM user_series LEFT JOIN series ON user_series.series_id = series.id "
                         "WHERE user_series.account_id = :user_id "
                         "ORDER BY user_series.date_modified DESC, user_series.date_created DESC").params(user_id = current_user.id)
@@ -28,6 +28,6 @@ class UserSeries(Base):
 
         response = []
         for row in res:
-            response.append({"series_name":row[0], "episodes_watched":row[1], "status":row[2], "id":row[3]})
+            response.append({"series_name":row[0], "episodes_watched":row[1], "status":row[2], "id":row[3], "series_eps":row[4]})
 
         return response

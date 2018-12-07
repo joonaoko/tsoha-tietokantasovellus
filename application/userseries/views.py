@@ -18,7 +18,8 @@ def userseries_index():
 def userseries_update_form(userseries_id):
   us = UserSeries.query.get(userseries_id)
   s = Series.query.get(us.series_id)
-  return render_template("userseries/update.html", userseries = us, series = s, form = UserSeriesUpdateForm())
+  form = UserSeriesUpdateForm(episodes_watched = us.episodes_watched, status = us.status)
+  return render_template("userseries/update.html", userseries = us, series = s, form = form)
 
 @app.route("/userseries/plus1/<userseries_id>/", methods=["POST"])
 @login_required
@@ -32,12 +33,13 @@ def userseries_increase_episodes_watched_by_one(userseries_id):
 @app.route("/userseries/update/<userseries_id>/", methods=["POST"])
 @login_required
 def userseries_update(userseries_id):
+  us = UserSeries.query.get(userseries_id)
+  s = Series.query.get(us.series_id)
   form = UserSeriesUpdateForm(request.form)
 
   if not form.validate():
-    return render_template("userseries/update.html", form = form)
-
-  us = UserSeries.query.get(userseries_id)
+    return render_template("userseries/update.html", userseries = us, series = s, form = form)
+    
   us.episodes_watched = form.episodes_watched.data
   us.status = form.status.data
   db.session().commit()
