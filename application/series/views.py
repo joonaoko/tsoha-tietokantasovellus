@@ -22,7 +22,8 @@ def series_form():
 @login_required(role="ADMIN")
 def series_update_form(series_id):
     s = Series.query.get(series_id)
-    return render_template("series/update.html", series = s, form = SeriesUpdateForm())
+    form = SeriesUpdateForm(name = s.name, episodes_total = s.episodes_total)
+    return render_template("series/update.html", series = s, form = form)
 
 @app.route("/series/<series_id>/", methods=["POST"])
 @login_required(role="ADMIN")
@@ -82,11 +83,11 @@ def series_create():
 @login_required(role="ADMIN")
 def series_update(series_id):
     form = SeriesUpdateForm(request.form)
+    s = Series.query.get(series_id)
 
     if not form.validate():
-        return render_template("series/update.html", form = form)
+        return render_template("series/update.html", series = s, form = form)
 
-    s = Series.query.get(series_id)
     s.name = form.name.data
     s.episodes_total = form.episodes_total.data
     db.session().commit()
