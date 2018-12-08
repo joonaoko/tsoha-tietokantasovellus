@@ -8,3 +8,7 @@ Sovellus Herokussa: https://tsoha-tvshowtracker.herokuapp.com/
 [Käyttäjätarinat](https://github.com/joonaoko/tvshowtracker/blob/master/documentation/userstories.md)
 
 [Tietokantakaavio](https://github.com/joonaoko/tvshowtracker/blob/master/documentation/databasediagram.md)
+
+[Asennusohje](https://github.com/joonaoko/tvshowtracker/blob/master/documentation/setupguide.md)
+
+[Käyttöohje](https://github.com/joonaoko/tvshowtracker/blob/master/documentation/userguide.md)
