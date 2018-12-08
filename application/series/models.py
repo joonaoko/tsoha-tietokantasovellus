@@ -16,6 +16,20 @@ class Series(Base):
         self.episodes_total = 0;
 
     @staticmethod
+    def find_series():
+        stmt = text("SELECT id, name, episodes_total "
+                    "FROM series "
+                    "ORDER BY series.name ASC")
+        
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"id":row[0], "name":row[1], "episodes_total":row[2]})
+
+        return response
+
+    @staticmethod
     def find_series_with_no_episodes():
         stmt = text("SELECT name FROM Series WHERE episodes_total = 0")
         res = db.engine.execute(stmt)
