@@ -3,7 +3,7 @@
 Sovellus, jolla voi pitää kirjaa katsomiaan TV-sarjoja sitä mukaa, kun katsoo jonkin jakson. Voidaan myös poistaa listalta sarjoja joita ei katso enää, ja listata erikseen sarjoja joita aikoo mahdollisesti katsoa tulevaisuudessa.
 
 Sovellus Herokussa: https://tsoha-tvshowtracker.herokuapp.com/
-(Testitunnukset: käyttäjänimi 'hello', salasana 'world')
+(Testitunnukset: käyttäjänimi 'testuser', salasana 'userpw')
 
 [Käyttäjätarinat](https://github.com/joonaoko/tvshowtracker/blob/master/documentation/userstories.md)
 
