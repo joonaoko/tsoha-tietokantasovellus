@@ -8,7 +8,7 @@ Voit myös luoda uuden käyttäjän rekisteröitymällä yläpalkin "Register"-l
 
 
 
-Kirjautumisen jälkeen tai oikeasta yläkulmasta löytyvää "TV Show Tracker" linkkiä klikkaamalla päästään etusivulle, jossa on listattuna 5 suosituinta sarjaa, eli sarjat joita on useimpien käyttäjien omilla listoillaan.
+Kirjautumisen jälkeen tai vasemmasta yläkulmasta löytyvää "TV Show Tracker" linkkiä klikkaamalla päästään etusivulle, jossa on listattuna 5 suosituinta sarjaa, eli sarjat joita on useimpien käyttäjien omilla listoillaan.
 
 "List series" -linkin kautta näet kaikki tietokannasta löytyvät sarjat, sekä niiden sarjojen jaksojen kokonaismäärä. Samasta listasta voit myös lisätä sarjoja omalle katsottavien sarjojen listalle. Admin-tunnuksilla kirjautuneena listassa on myös Edit-painike, jonka kautta voit muokata sarjan nimeä, sekä jaksojen määrää syöttämällä uudet arvot. Lisäksi admin-tunnuksilla voidaan poistaa sarjoja tietokannasta, jolloin sarjat poistuvat myös käyttäjien Watchlist-listoista.
 
