@@ -6,6 +6,8 @@ from application.auth.models import User
 from application.auth.forms import LoginForm
 from application.auth.forms import RegistrationForm
 
+from sqlalchemy.exc import IntegrityError
+
 @app.route("/auth/login", methods=["GET", "POST"])
 def auth_login():
     if request.method == "GET":
@@ -40,6 +42,12 @@ def user_create():
 
     u = User(form.name.data, form.username.data, form.password.data)
     db.session().add(u)
-    db.session().commit()
+
+    try:
+        db.session().commit()
+    except IntegrityError:
+        db.session.rollback()
+        return render_template("auth/registrationform.html", form = form,
+                               error = "An account with this username already exists")
 
     return redirect(url_for("index"))
