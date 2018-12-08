@@ -34,9 +34,5 @@
     </tr>
     {% endfor %}
   </table>
-  <ul>
-    {% for error in form.episodes_total.errors %}
-    <li>{{ error }}</li>
-    {% endfor %}
-  </ul>
+  {{ error }}
 {% endblock %}

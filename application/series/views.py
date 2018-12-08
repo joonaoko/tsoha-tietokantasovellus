@@ -11,7 +11,8 @@ from sqlalchemy import text
 @app.route("/series", methods=["GET"])
 def series_index():
     form = SeriesEpisodesTotalForm(request.form)
-    return render_template("series/list.html", series = Series.query.all(), form = form)
+
+    return render_template("series/list.html", series = Series.find_series(), form = form)
 
 @app.route("/series/new/")
 @login_required(role="ANY")
@@ -45,10 +46,14 @@ def series_add_to_userseries(series_id):
     us = UserSeries()
     us.series_id = series_id
     us.account_id = current_user.id
+    
+    onWatchlist = UserSeries.query.filter_by(account_id=current_user.id, series_id=series_id).all()
 
-    db.session().add(us)
-    db.session().commit()
-
+    if not onWatchlist:
+        db.session().add(us)
+        db.session().commit()
+    else:        
+        return render_template("series/list.html", series = Series.find_series(), error = "This series is already on your Watchlist")
     return redirect(url_for("series_index"))
 
 @app.route("/series/delete/<series_id>/", methods=["POST"])
