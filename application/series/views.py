@@ -40,6 +40,11 @@ def series_set_episodes_total(series_id):
 
     return redirect(url_for("series_index"))
 
+@app.route("/series/show/<series_id>/", methods=["GET"])
+def series_show(series_id):
+    s = Series.query.get(series_id)
+    return render_template("series/show.html", series = s)
+
 @app.route("/series/addtolist/<series_id>/", methods=["POST"])
 @login_required(role="ANY")
 def series_add_to_userseries(series_id):

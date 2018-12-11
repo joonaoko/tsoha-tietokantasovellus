@@ -12,7 +12,7 @@
     
     {% for series in series %}
     <tr>
-      <td>{{ series.name }}</td>
+      <td><a href="{{ url_for('series_show', series_id=series.id) }}">{{ series.name }}</a></td>
       <td>{{ series.episodes_total }}</td>
       {% if current_user.role == 'ADMIN' %}
       <td>
