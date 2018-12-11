@@ -58,7 +58,7 @@ class Series(Base):
     @staticmethod
     def find_recently_watched_series():
         if os.environ.get("HEROKU"):
-            stmt = text("SELECT series.name AS name, user_series.date_modified FROM ("
+            stmt = text("SELECT * FROM ("
                             "SELECT DISTINCT ON (series.id) * "
                             "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
                             "WHERE user_series.date_modified >= now() - interval '24 hour' "
@@ -73,6 +73,6 @@ class Series(Base):
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"name":row[1]})
+            response.append({"series.name":row[1]})
 
         return response
