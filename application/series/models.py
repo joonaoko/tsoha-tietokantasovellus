@@ -62,7 +62,7 @@ class Series(Base):
                             "SELECT series.id, series.name AS name, user_series.date_modified "
                             "FROM series INNER JOIN user_series ON series.id = user_series.series_id "
                             "WHERE user_series.date_modified >= now() - interval '24 hour' "
-                            "ORDER BY user_series.date_modified DESC) q"
+                            "ORDER BY user_series.date_modified DESC) q "
                         "LIMIT 10")
         else: 
             stmt = text("SELECT DISTINCT series.id, series.name AS name "
