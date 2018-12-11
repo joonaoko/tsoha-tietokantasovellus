@@ -58,12 +58,11 @@ class Series(Base):
     @staticmethod
     def find_recently_watched_series():
         if os.environ.get("HEROKU"):
-            stmt = text("SELECT * FROM ("
-                            "SELECT DISTINCT ON (series.id) series.id, series.name, user_series.date_modified "
+            stmt = text("SELECT DISTINCT ON (series.id), series.name AS name FROM ("
+                            "SELECT series.id, series.name, user_series.date_modified "
                             "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
                             "WHERE user_series.date_modified >= now() - interval '24 hour' "
-                            ") u "
-                        "ORDER BY user_series.date_modified DESC LIMIT 10")
+                            "ORDER BY user_series.date_modified DESC LIMIT 10)")
         else: 
             stmt = text("SELECT DISTINCT series.id, series.name AS name "
                         "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
@@ -73,6 +72,6 @@ class Series(Base):
         res = db.engine.execute(stmt)
         response = []
         for row in res:
-            response.append({"series.name":row[1]})
+            response.append({"name":row[1]})
 
         return response
