@@ -3,6 +3,8 @@ from application.models import Base
 
 from sqlalchemy.sql import text
 
+import os
+
 class Series(Base):
     id = db.Column(db.Integer, primary_key=True)
 
@@ -50,5 +52,25 @@ class Series(Base):
         response = []
         for row in res:
             response.append({"name":row[0], "amount":row[1]})
+
+        return response
+
+    @staticmethod
+    def find_recently_watched_series():
+        if os.environ.get("HEROKU"):
+            stmt = text("SELECT series.name AS name, user_series.date_modified AS date_updated"
+                        "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
+                        "WHERE date_updated >= now() - '1 day'::INTERVAL "
+                        "ORDER BY date_updated DESC LIMIT 10")
+        else: 
+            stmt = text("SELECT series.name AS name, user_series.date_modified AS date_updated "
+                        "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
+                        "WHERE date_updated >= datetime('now','-1 day') "
+                        "ORDER BY date_updated DESC LIMIT 10")
+
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"name":row[0]})
 
         return response

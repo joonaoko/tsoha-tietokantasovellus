@@ -13,15 +13,14 @@
     {% endfor %}
   </ol>
   <br>
-
-  {% if no_episodes is defined %}
-  <p>Series with no listed episodes:</p>
+  
+  <p>Active series in the past 24 hours: </p>
   <ul>
-    {% for series in no_episodes %}
-    <li>
-      {{series.name}}
-    </li>
-    {% endfor %}
+      {% for series in recently_watched %}
+      <li>
+        {{series.name}}
+      </li>
+      {% endfor %}
   </ul>
-  {% endif %}
+
 {% endblock %}
