@@ -59,7 +59,7 @@ class Series(Base):
     def find_recently_watched_series():
         if os.environ.get("HEROKU"):
             stmt = text("SELECT series.name AS name, user_series.date_modified FROM ("
-                            "SELECT DISTINCT ON (series.id) *"
+                            "SELECT DISTINCT ON (series.id) * "
                             "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
                             "WHERE user_series.date_modified >= now() - interval '24 hour' "
                         ") u "
