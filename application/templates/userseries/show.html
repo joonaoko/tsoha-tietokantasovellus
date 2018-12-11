@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<h1 class="display-4">{{ series.name }}</h4>
+<table class="table">
+  <tr>
+    <td>Episodes watched:</td>
+    <td>{{ userseries.episodes_watched }} / {{ series.episodes_total }}</td>
+  </tr>
+  <tr>
+    <td>Last updated:</td>
+    <td>{{ userseries.date_modified }}</td>
+  </tr>
+  <tr>
+    <td>Added to watchlist:</td>
+    <td>{{ userseries.date_created }}</td>
+  </tr>
+</table>
+{% endblock %}

@@ -21,6 +21,13 @@ def userseries_update_form(userseries_id):
   form = UserSeriesUpdateForm(episodes_watched = us.episodes_watched, status = us.status)
   return render_template("userseries/update.html", userseries = us, series = s, form = form)
 
+@app.route("/userseries/show/<userseries_id>")
+@login_required
+def userseries_show(userseries_id):
+  us = UserSeries.query.get(userseries_id)
+  s = Series.query.get(us.series_id)
+  return render_template("userseries/show.html", userseries = us, series = s)
+
 @app.route("/userseries/plus1/<userseries_id>/", methods=["POST"])
 @login_required
 def userseries_increase_episodes_watched_by_one(userseries_id):
