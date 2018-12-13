@@ -45,5 +45,5 @@
 
 * Järjestelmänvalvojana voin poistaa sarjoja tietokannasta, jolloin sarja poistetaan myös kaikilta seurattavien sarjojen listoilta.
 
-`DELETE FROM user_series WHERE series.id = <series.id>;`
+`DELETE FROM user_series WHERE series.id = <series.id>;`<br>
 `DELETE FROM series WHERE id = <series.id>;`
