@@ -4,6 +4,7 @@
 
 `SELECT * FROM series;`
 
+
 * Käyttäjänä voin katsella sarjan tietoja sarjan omalta sivulta.
 
 `SELECT * FROM series WHERE id = <series.id>;`
@@ -26,8 +27,8 @@
 
 * Kirjautuneena käyttäjänä voin listasta kasvattaa yksittäisen sarjan katsottujen jaksojen määrää yhdellä.
 
-`SELECT episodes_watched FROM user_series WHERE id = <userseries.id>` => episodesWatched
-`episodesWatched++`
+`SELECT episodes_watched FROM user_series WHERE id = <userseries.id>` => episodesWatched<br>
+`episodesWatched++`<br>
 `UPDATE user_series SET episodes_watched = <episodesWatched> WHERE id = <userseries.id>;`
 
 * Kirjautuneena käyttäjänä voin muokkausnäkymässä muokata katsottujen jaksojen määrää syöttämällä uuden määrän, ja siirtää sarjan "aktiivisesti katsottujen" listalta "mahdollisesti katsottavien" listalle, ja toisin päin.
