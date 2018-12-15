@@ -75,18 +75,3 @@ class Series(Base):
             response.append({"name":row[1]})
 
         return response
-
-    @staticmethod
-    def find_users_watched_series():
-        stmt = text("SELECT account.username AS username, COUNT(user_series.series_id) AS amount "
-                    "FROM account INNER JOIN user_series ON user_series.account_id = account.id "
-                    "WHERE user_series.status = 'Watching' "
-                    "GROUP BY username "
-                    "ORDER BY amount DESC LIMIT 5")
-
-        res = db.engine.execute(stmt)
-        response = []
-        for row in res:
-            response.append({"username":row[0], "amount":row[1]})
-
-        return response

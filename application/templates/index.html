@@ -25,12 +25,12 @@
   <br>
 
   <p>Users who are currently watching most shows: </p>
-  <ul>
+  <ol>
     {% for user in users_series %}
     <li>
-      {{user.username}}&nbsp;(Watching {{user.amount}} series)
+      {{user.username}}&nbsp;(Watching {{user.watching}} series, {{user.eps_watched_total}} episodes watched in total)
     </li>
     {% endfor %}
-  </ul>
+  </ol>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from application import db
 from application.models import Base
 from sqlalchemy import UniqueConstraint
+from sqlalchemy.sql import text
 
 class User(Base):
 
@@ -34,3 +35,19 @@ class User(Base):
 
     def roles(self):
         return self.role
+
+        
+    @staticmethod
+    def find_users_watched_series():
+        stmt = text("SELECT account.username AS username, COUNT(user_series.series_id) AS watching, SUM(user_series.episodes_watched) AS eps_watched_total "
+                    "FROM account INNER JOIN user_series ON user_series.account_id = account.id "
+                    "WHERE user_series.status = 'Watching' "
+                    "GROUP BY username "
+                    "ORDER BY watching DESC LIMIT 5")
+
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"username":row[0], "watching":row[1], "eps_watched_total":row[2]})
+
+        return response
