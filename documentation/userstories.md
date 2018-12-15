@@ -53,10 +53,10 @@
 * Käyttäjänä voin nähdä listan suosituimmista sarjoista, ja sarjoja seuraavien käyttäjien määrät.
 ```sqlite
 SELECT series.name AS name, COUNT(user_series.series_id) AS amount
-	FROM user_series INNER JOIN series ON user_series.series_id = series.id
-	GROUP BY series.name
-	ORDER BY amount DESC
-	LIMIT 5;
+  FROM user_series INNER JOIN series ON user_series.series_id = series.id
+  GROUP BY series.name
+  ORDER BY amount DESC
+  LIMIT 5;
 ```
 
 * Käyttäjänä voin nähdä listan viimeisimmän 24 tunnin aikana käyttäjien Watchlisteillä päivitetyistä sarjoista.
@@ -65,7 +65,7 @@ SELECT DISTINCT series.id, series.name AS name
   FROM user_series INNER JOIN series ON user_series.series_id = series.id
   WHERE user_series.date_modified >= datetime('now','-1 day')
   ORDER BY user_series.date_modified DESC
-	LIMIT 10;
+  LIMIT 10;
 ```
 
 * Käyttäjänä voin nähdä listan käyttäjistä, jotka tällä hetkellä katsovat useimpia sarjoja, ja kuinka monta jaksoa niitä he ovat katsoneet.
@@ -75,5 +75,5 @@ SELECT account.username AS username, COUNT(user_series.series_id) AS watching, S
   WHERE user_series.status = 'Watching' "
   GROUP BY username "
   ORDER BY watching DESC, eps_watched_total DESC
-	LIMIT 5;
+  LIMIT 5;
 ```
