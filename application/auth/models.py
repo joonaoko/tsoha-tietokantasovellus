@@ -43,7 +43,7 @@ class User(Base):
                     "FROM account INNER JOIN user_series ON user_series.account_id = account.id "
                     "WHERE user_series.status = 'Watching' "
                     "GROUP BY username "
-                    "ORDER BY watching DESC LIMIT 5")
+                    "ORDER BY watching DESC, eps_watched_total DESC LIMIT 5")
 
         res = db.engine.execute(stmt)
         response = []
