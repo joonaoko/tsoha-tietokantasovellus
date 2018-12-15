@@ -70,10 +70,10 @@ SELECT DISTINCT series.id, series.name AS name
 
 * Käyttäjänä voin nähdä listan käyttäjistä, jotka tällä hetkellä katsovat useimpia sarjoja, ja kuinka monta jaksoa niitä he ovat katsoneet.
 ```sqlite	
-SELECT account.username AS username, COUNT(user_series.series_id) AS watching, SUM(user_series.episodes_watched) AS eps_watched_total "
-  FROM account INNER JOIN user_series ON user_series.account_id = account.id "
-  WHERE user_series.status = 'Watching' "
-  GROUP BY username "
+SELECT account.username AS username, COUNT(user_series.series_id) AS watching, SUM(user_series.episodes_watched) AS eps_watched_total
+  FROM account INNER JOIN user_series ON user_series.account_id = account.id
+  WHERE user_series.status = 'Watching'
+  GROUP BY username
   ORDER BY watching DESC, eps_watched_total DESC
   LIMIT 5;
 ```
