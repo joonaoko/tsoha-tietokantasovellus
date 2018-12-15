@@ -22,5 +22,15 @@
       </li>
       {% endfor %}
   </ul>
+  <br>
+
+  <p>Users who are currently watching most shows: </p>
+  <ul>
+    {% for user in users_series %}
+    <li>
+      {{user.username}}&nbsp;(Watching {{user.amount}} series)
+    </li>
+    {% endfor %}
+  </ul>
 
 {% endblock %}

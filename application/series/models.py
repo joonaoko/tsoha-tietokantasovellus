@@ -63,14 +63,30 @@ class Series(Base):
                         "WHERE user_series.date_modified >= now() - interval '24 hour' "
                         "LIMIT 10")
         else: 
-            stmt = text("SELECT DISTINCT series.id, series.name AS name "
-                        "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
-                        "WHERE user_series.date_modified >= datetime('now','-1 day') "
-                        "ORDER BY user_series.date_modified DESC LIMIT 10")
+            stmt = text(
+                "SELECT DISTINCT series.id, series.name AS name "
+                "FROM user_series INNER JOIN series ON user_series.series_id = series.id "
+                "WHERE user_series.date_modified >= datetime('now','-1 day') "
+                "ORDER BY user_series.date_modified DESC LIMIT 10")
 
         res = db.engine.execute(stmt)
         response = []
         for row in res:
             response.append({"name":row[1]})
+
+        return response
+
+    @staticmethod
+    def find_users_watched_series():
+        stmt = text("SELECT account.username AS username, COUNT(user_series.series_id) AS amount "
+                    "FROM account INNER JOIN user_series ON user_series.account_id = account.id "
+                    "WHERE user_series.status = 'Watching' "
+                    "GROUP BY username "
+                    "ORDER BY amount DESC LIMIT 5")
+
+        res = db.engine.execute(stmt)
+        response = []
+        for row in res:
+            response.append({"username":row[0], "amount":row[1]})
 
         return response
